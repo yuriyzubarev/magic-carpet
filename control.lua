@@ -1,23 +1,22 @@
 script.on_event({defines.events.on_player_changed_position},
     function (e)
         local surface = game.surfaces[1]
-        local p = game.players[e.player_index].position
+        local pos = game.players[e.player_index].position
         
-        local existing = surface.get_tile(p).name
-        local future = "stone-path"
+        local existing_tile = surface.get_tile(pos).name
+        local future_tile = "stone-path"
         
-        if existing ~= "refined-concrete" then
-            if existing == "concrete" then
-                future = "refined-concrete"
-            elseif existing == "stone-path" then
-                future = "concrete"
+        if existing_tile ~= "refined-concrete" then
+            if existing_tile == "concrete" then
+                future_tile = "refined-concrete"
+            elseif existing_tile == "stone-path" then
+                future_tile = "concrete"
             end
             
-            if existing ~= "water" then
-                surface.set_tiles{{name=future, position=p}}
+            if existing_tile ~= "water" then
+                surface.set_tiles{{name=future_tile, position=pos}}
             end
         end
 
     end
 )
-
